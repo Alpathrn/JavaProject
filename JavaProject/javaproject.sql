@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 21, 2019 at 08:57 PM
+-- Generation Time: May 21, 2019 at 06:01 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.3.1
 
@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `AnnéeScolaire` (
-  `id` int(4) NOT NULL
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
