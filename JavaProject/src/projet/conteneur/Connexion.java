@@ -1,5 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this template, choose Tools | Templates  
  * and open the template in the editor.
  */
 package projet.conteneur;
@@ -14,7 +14,7 @@ import java.sql.Connection;
 
 /**
  * 
- * Connexion a votre BDD locale ou à distance sur le serveur de l'ECE via le tunnel SSH
+ * Connexion a votre BDD locale
  * 
  * @author segado
  */
@@ -74,12 +74,12 @@ public class Connexion {
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
+    /*public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
 
         // Connexion via le tunnel SSH avec le username et le password ECE
-        SSHTunnel ssh = new SSHTunnel(usernameECE, passwordECE);
+        //SSHTunnel ssh = new SSHTunnel(usernameECE, passwordECE);
 
         if (ssh.connect()) {
             System.out.println("Connexion reussie");
@@ -94,7 +94,7 @@ public class Connexion {
             stmt = conn.createStatement();
 
         }
-    }
+    }*/
 
     /**
      * Méthode qui ajoute la table en parametre dans son ArrayList
