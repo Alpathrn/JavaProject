@@ -50,12 +50,12 @@ public class Connexion {
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
+    public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase, String portDatabase) throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
 
         // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
-        String urlDatabase = "jdbc:mysql://localhost/" + nameDatabase;
+        String urlDatabase = "jdbc:mysql://localhost:" + portDatabase + "/" + nameDatabase;
 
         //création d'une connexion JDBC à la base 
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
@@ -63,38 +63,6 @@ public class Connexion {
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement();
     }
-
-    /**
-     * Constructeur avec 4 paramètres : username et password ECE, login et
-     * password de la BDD à distance sur le serveur de l'ECE
-     * @param usernameECE
-     * @param passwordECE
-     * @param loginDatabase
-     * @param passwordDatabase
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
-     */
-    /*public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
-        // chargement driver "com.mysql.jdbc.Driver"
-        Class.forName("com.mysql.jdbc.Driver");
-
-        // Connexion via le tunnel SSH avec le username et le password ECE
-        //SSHTunnel ssh = new SSHTunnel(usernameECE, passwordECE);
-
-        if (ssh.connect()) {
-            System.out.println("Connexion reussie");
-
-            // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
-            String urlDatabase = "jdbc:mysql://localhost:3305/" + usernameECE;
-
-            //création d'une connexion JDBC à la base
-            conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
-
-            // création d'un ordre SQL (statement)
-            stmt = conn.createStatement();
-
-        }
-    }*/
 
     /**
      * Méthode qui ajoute la table en parametre dans son ArrayList

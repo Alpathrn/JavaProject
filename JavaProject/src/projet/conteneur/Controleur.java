@@ -1,6 +1,6 @@
 package projet.conteneur;
-import projet.view.Fenetre;
-
+import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * Contrôle l'interrogation de la BDD dans la Fenetre
@@ -15,7 +15,24 @@ public class Controleur {
      * @param s
      */
       public static void main(String[] s) {
-        Fenetre f = new Fenetre();
+          /*try{
+            Connexion co = new Connexion("projet", "root", "");
+              
+          } catch(SQLException | ClassNotFoundException ex){
+              
+          }*/
+          try {
+            try {
+                Connexion con = new Connexion("projet", "root", "root", "3306");
+                JOptionPane.showMessageDialog(null, "Connexion à la BDD Projet réussie!");
+            } catch (ClassNotFoundException cnfe) {
+                JOptionPane.showMessageDialog(null, "Connexion à la BDD échouée, problème de classe.");
+                cnfe.printStackTrace();
+            }
+        } catch (SQLException exp) {
+            JOptionPane.showMessageDialog(null, "Connexion à la BDD échouée, Projet n'existe pas.");
+            exp.printStackTrace();
+        }
     }
 }
      
