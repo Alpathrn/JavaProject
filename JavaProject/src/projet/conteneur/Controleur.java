@@ -23,7 +23,7 @@ public class Controleur {
           }*/
           try {
             try {
-                Connexion con = new Connexion("projet", "root", "root", "3306");
+                Connexion con = new Connexion("projet", "root", "");
                 JOptionPane.showMessageDialog(null, "Connexion à la BDD Projet réussie!");
             } catch (ClassNotFoundException cnfe) {
                 JOptionPane.showMessageDialog(null, "Connexion à la BDD échouée, problème de classe.");
