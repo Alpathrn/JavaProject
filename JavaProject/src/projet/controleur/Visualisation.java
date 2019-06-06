@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projet.view;
-
-import projet.conteneur.Connexion;
+package projet.controleur;
 
 /**
  *
  * @author hdela
  */
-public class Fenetre {
-   private JButton btn_connexion; 
+public class Visualisation {
+    
 }

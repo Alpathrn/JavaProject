@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 21, 2019 at 06:01 PM
+-- Generation Time: Jun 03, 2019 at 06:30 AM
 -- Server version: 5.7.25
 -- PHP Version: 7.3.1
 
@@ -24,6 +24,15 @@ CREATE TABLE `AnnéeScolaire` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `AnnéeScolaire`
+--
+
+INSERT INTO `AnnéeScolaire` (`id`) VALUES
+(2018),
+(2019),
+(2020);
+
 -- --------------------------------------------------------
 
 --
@@ -36,6 +45,15 @@ CREATE TABLE `Bulletin` (
   `inscription_id` int(11) NOT NULL,
   `appréciation` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Bulletin`
+--
+
+INSERT INTO `Bulletin` (`id`, `trimestre_id`, `inscription_id`, `appréciation`) VALUES
+(1, 1, 1, '1er trimestre'),
+(2, 3, 2, '3eme trimestre\r\n'),
+(3, 2, 3, '2eme trimestre');
 
 -- --------------------------------------------------------
 
@@ -51,6 +69,18 @@ CREATE TABLE `Classe` (
   `annéescolaire_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Classe`
+--
+
+INSERT INTO `Classe` (`id`, `nom`, `école_id`, `niveau_id`, `annéescolaire_id`) VALUES
+(1, 'TD1', 1, 1, 2018),
+(2, 'TD2', 1, 3, 2019),
+(3, 'TD1', 3, 3, 2019),
+(4, 'TD2', 3, 1, 2018),
+(5, 'TD3', 1, 5, 2018),
+(6, 'TD1', 2, 1, 2018);
+
 -- --------------------------------------------------------
 
 --
@@ -64,6 +94,15 @@ CREATE TABLE `DetailBulletin` (
   `appréciation` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `DetailBulletin`
+--
+
+INSERT INTO `DetailBulletin` (`id`, `bulletin_id`, `enseignement_id`, `appréciation`) VALUES
+(1, 1, 1, 'Bon travail'),
+(2, 3, 2, 'Faible'),
+(3, 2, 1, 'Continuez ainsi\r\n');
+
 -- --------------------------------------------------------
 
 --
@@ -75,6 +114,16 @@ CREATE TABLE `Discipline` (
   `nom` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Discipline`
+--
+
+INSERT INTO `Discipline` (`id`, `nom`) VALUES
+(1, 'francais'),
+(2, 'mathematiques'),
+(3, 'anglais'),
+(4, 'informatique');
+
 -- --------------------------------------------------------
 
 --
@@ -85,6 +134,15 @@ CREATE TABLE `Ecole` (
   `id` int(11) NOT NULL,
   `nom` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Ecole`
+--
+
+INSERT INTO `Ecole` (`id`, `nom`) VALUES
+(1, 'ECE_paris'),
+(2, 'ECE_tech'),
+(3, 'ECE_lyon');
 
 -- --------------------------------------------------------
 
@@ -99,6 +157,15 @@ CREATE TABLE `Enseignement` (
   `personne_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Enseignement`
+--
+
+INSERT INTO `Enseignement` (`id`, `classe_id`, `discipline_id`, `personne_id`) VALUES
+(1, 1, 4, 6),
+(2, 3, 2, 5),
+(3, 4, 2, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -112,6 +179,15 @@ CREATE TABLE `Evaluation` (
   `appréciation` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Evaluation`
+--
+
+INSERT INTO `Evaluation` (`id`, `detailbulletin_id`, `note`, `appréciation`) VALUES
+(1, 1, 18, 'Tres bien'),
+(2, 3, 14, 'Bien'),
+(3, 2, 10, 'Passage juste');
+
 -- --------------------------------------------------------
 
 --
@@ -124,6 +200,16 @@ CREATE TABLE `Inscription` (
   `personne_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Inscription`
+--
+
+INSERT INTO `Inscription` (`id`, `classe_id`, `personne_id`) VALUES
+(1, 1, 4),
+(2, 3, 1),
+(3, 2, 2),
+(4, 1, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -134,6 +220,17 @@ CREATE TABLE `Niveau` (
   `id` int(11) NOT NULL,
   `nom` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Niveau`
+--
+
+INSERT INTO `Niveau` (`id`, `nom`) VALUES
+(1, 'ing1'),
+(2, 'ing2'),
+(3, 'ing3'),
+(4, 'ing4'),
+(5, 'ing5');
 
 -- --------------------------------------------------------
 
@@ -148,6 +245,18 @@ CREATE TABLE `Personne` (
   `type` enum('enseignant','élève') DEFAULT 'élève'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `Personne`
+--
+
+INSERT INTO `Personne` (`id`, `nom`, `prénom`, `type`) VALUES
+(1, 'Sorcelle', 'Leonie', 'élève'),
+(2, 'Thirouin', 'Alpaïde', 'élève'),
+(3, 'Thibault', 'Henry', 'élève'),
+(4, 'Baret', 'Louis', 'élève'),
+(5, 'Coudray', 'Fabienne', 'enseignant'),
+(6, 'Segado', 'Jean-Pierre', 'enseignant');
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +270,15 @@ CREATE TABLE `Trimestre` (
   `fin` text NOT NULL,
   `annéescolaire_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Trimestre`
+--
+
+INSERT INTO `Trimestre` (`id`, `numéro`, `début`, `fin`, `annéescolaire_id`) VALUES
+(1, 1, 'septembre', 'decembre', 2019),
+(2, 2, 'janvier', 'avril', 2019),
+(3, 3, 'mai', 'juillet', 2019);
 
 --
 -- Indexes for dumped tables
@@ -260,67 +378,67 @@ ALTER TABLE `Trimestre`
 -- AUTO_INCREMENT for table `Bulletin`
 --
 ALTER TABLE `Bulletin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Classe`
 --
 ALTER TABLE `Classe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `DetailBulletin`
 --
 ALTER TABLE `DetailBulletin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Discipline`
 --
 ALTER TABLE `Discipline`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `Ecole`
 --
 ALTER TABLE `Ecole`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Enseignement`
 --
 ALTER TABLE `Enseignement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Evaluation`
 --
 ALTER TABLE `Evaluation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Inscription`
 --
 ALTER TABLE `Inscription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `Niveau`
 --
 ALTER TABLE `Niveau`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `Personne`
 --
 ALTER TABLE `Personne`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `Trimestre`
 --
 ALTER TABLE `Trimestre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
