@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hdela/Documents/Cours%20ECE%20ING3/Java/Projet/JavaProject/JavaProject/src/projet/conteneur/Controleur.java</file>
-            <file>file:/C:/Users/hdela/Documents/Cours%20ECE%20ING3/Java/Projet/JavaProject/JavaProject/src/projet/view/Fenetre.java</file>
-            <file>file:/C:/Users/hdela/Documents/Cours%20ECE%20ING3/Java/Projet/JavaProject/JavaProject/src/projet/conteneur/Connexion.java</file>
+            <file>file:/C:/Users/hdela/Downloads/JavaProject-6/JavaProject/src/projet/controleur/Connexion.java</file>
+            <file>file:/C:/Users/hdela/Downloads/JavaProject-6/JavaProject/src/projet/controleur/Reporting.java</file>
+            <file>file:/C:/Users/hdela/Downloads/JavaProject-6/JavaProject/src/projet/controleur/Controleur.java</file>
+            <file>file:/C:/Users/hdela/Downloads/JavaProject-6/JavaProject/src/projet/view/FenetreAccueil.java</file>
+            <file>file:/C:/Users/hdela/Downloads/JavaProject-6/JavaProject/src/projet/view/FenetreConnexion.java</file>
+            <file>file:/C:/Users/hdela/Downloads/JavaProject-6/JavaProject/src/projet/view/FenetreReporting.java</file>
         </group>
     </open-files>
 </project-private>

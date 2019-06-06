@@ -8,12 +8,12 @@ package projet.controleur;
  * 
  * Librairies importées
  */
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.ArrayList;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
-import projet.view.FenetreAccueil;
-import projet.view.FenetreReporting;
 
 /**
  * 
@@ -21,8 +21,7 @@ import projet.view.FenetreReporting;
  * 
  * @author segado
  */
-public class Connexion {
-
+public class Connexion implements ActionListener{
     /**
      * Attributs prives : connexion JDBC, statement, ordre requete et resultat
      * requete
@@ -67,11 +66,24 @@ public class Connexion {
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement();
                         
+        //new FenetreAccueil(conn).setVisible(true);
     }
         
     public Connexion() throws SQLException
     {  
-        new FenetreAccueil(conn).setVisible(true);
+        try {
+            try {
+                Connexion connexion = new Connexion("javaproject", "root", "root", "3306");
+                JOptionPane.showMessageDialog(null, "Connexion à la BDD réussie!");
+
+            } catch (ClassNotFoundException cnfe) {
+                JOptionPane.showMessageDialog(null, "Connexion à la BDD échouée, problème de classe.");
+                cnfe.printStackTrace();
+            }
+        } catch (SQLException exp) {
+            JOptionPane.showMessageDialog(null, "Connexion à la BDD échouée, ??? n'existe pas.");
+            exp.printStackTrace();
+        }
     }
 
     /**
@@ -188,7 +200,9 @@ public class Connexion {
     public void executeUpdate(String requeteMaj) throws SQLException {
         stmt.executeUpdate(requeteMaj);
     }
-    
 
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

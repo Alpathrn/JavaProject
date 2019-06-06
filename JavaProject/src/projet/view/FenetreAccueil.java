@@ -32,8 +32,8 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         this.btnMAJ= new JButton("Mise à jour"); 
         this.btnRecherche = new JButton("Recherche"); 
         this.btnReporting = new JButton("Reporting");
-        this.btnVisualisation = new JButton("Visualisation");
-        this.btnVisualisation = new JButton("Connexion");
+        this.btnVisualisation = new JButton("Visualisation");  
+        this.btnConnexion = new JButton("Connexion"); 
         boutonsAccueil();    
         this.getContentPane().add(Accueil);
         this.setVisible(true);
@@ -46,7 +46,7 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         btnRecherche.setBounds(350, 200, 150, 50);
         btnReporting.setBounds(150, 500, 150, 50);
         btnVisualisation.setBounds(350, 500, 150, 50);
-        btnReporting.setForeground(Color.BLUE); 
+        //btnReporting.setForeground(Color.BLUE); 
         btnMAJ.addActionListener(this);
         btnRecherche.addActionListener(this);
         btnVisualisation.addActionListener(this);
@@ -66,6 +66,7 @@ public class FenetreAccueil extends JFrame implements ActionListener{
 
         if(clic == btnMAJ) 
         {
+            
             this.setVisible(false);
             new FenetreMAJ(connection).setVisible(true);
             
@@ -88,12 +89,10 @@ public class FenetreAccueil extends JFrame implements ActionListener{
                 new FenetreVisualisation(connection).setVisible(true);
             */
         }
-        else if(clic == btnConnexion){
+        else if(clic == btnConnexion) //acces a la fenetre de connexion
+        {
             this.setVisible(false);
             new FenetreConnexion().setVisible(true);
         }
-    
-       
     }
-    
 }

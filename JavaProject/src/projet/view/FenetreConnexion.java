@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import projet.controleur.Connexion;
@@ -20,38 +21,48 @@ import projet.controleur.Connexion;
  *
  * @author hdela
  */
-public class FenetreConnexion extends JFrame {
-    private JFrame frame_Connexion;
+public class FenetreConnexion extends JFrame{
+    
     private JLabel lbl_nom, lbl_login, lbl_mdp, lbl_port;
     private JTextField text_nom, text_login, text_port; 
+    private final JPanel page = new JPanel();
     private JPasswordField pw_mdp;
     private JButton btn_local;
     static Connexion maconnexion;
     
     public FenetreConnexion()
     {
-        frame_Connexion = new JFrame();
-        frame_Connexion.setTitle("Connexion a la BDD"); 
-	frame_Connexion.setSize(1450, 700);
+        super("Connexion");
+        setTitle("Connexion a la BDD"); 
+	setSize(900, 500);
 
         lbl_nom = new JLabel("Nom de la BDD:");
         lbl_nom.setBounds(150, 100, 150, 20);
+        page.add(lbl_nom);
         text_nom = new JTextField("projet");
         text_nom.setBounds(300, 100, 150, 20);
+        page.add(text_nom);
         lbl_login = new JLabel("Login:");
         lbl_login.setBounds(150, 200, 150, 20);
+        page.add(lbl_login);
         text_login = new JTextField("root");
-        text_login.setBounds(300, 200, 150, 20);         
+        text_login.setBounds(300, 200, 150, 20); 
+        page.add(text_login);
         lbl_mdp = new JLabel("Mot de passe:");
         lbl_mdp.setBounds(150, 250, 150, 20);
+        page.add(lbl_mdp);
         pw_mdp = new JPasswordField("root");
-        pw_mdp.setBounds(300, 250, 150, 20);         
+        pw_mdp.setBounds(300, 250, 150, 20); 
+        page.add(pw_mdp);
         lbl_port = new JLabel("Port:");
         lbl_port.setBounds(150, 300, 150, 20);
+        page.add(lbl_port);
         text_port = new JTextField("3306");
         text_port.setBounds(300, 300, 150, 20);
+        page.add(text_port);
         btn_local = new JButton("Connexion locale");
         btn_local.setBounds(150, 600, 150, 20);
+        page.add(btn_local);
         btn_local.addActionListener(new ActionListener()
         {
             @Override
@@ -71,5 +82,7 @@ public class FenetreConnexion extends JFrame {
                 }
             }
         }); 
+        
+        this.add(page);
     }
 }
