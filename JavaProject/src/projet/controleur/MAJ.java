@@ -7,10 +7,6 @@ package projet.controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import projet.modele.DAO.*;
 import projet.view.FenetreAccueil;
 import projet.view.FenetreMAJ;
@@ -22,13 +18,14 @@ import projet.view.FenetreMAJ;
 public class MAJ implements ActionListener{
     
     private FenetreMAJ fenMAJ;
-    private Connection connection;
+    private Connexion connexion;
     
-    public MAJ(FenetreMAJ fenetre, Connection conn)
+    public MAJ(FenetreMAJ fenetre, Connexion conn)
     {
         this.fenMAJ = fenetre;
-        this.connection = conn;    
+        this.connexion = conn;    
     }
+   
     
     @Override
     public void actionPerformed(ActionEvent e)
@@ -36,11 +33,11 @@ public class MAJ implements ActionListener{
         Object clic = e.getSource();
         
         if(clic == fenMAJ.getbtn(0)) // savoir sur quel bouton on a cliqué
-        {fenMAJ.setType(1);}
+        {fenMAJ.settype(1);}
         if(clic == fenMAJ.getbtn(1))// savoir sur quel bouton on a cliqué
-        {fenMAJ.setType(2);}
+        {fenMAJ.settype(2);}
         if(clic == fenMAJ.getbtn(2))// savoir sur quel bouton on a cliqué
-        {fenMAJ.setType(3);}
+        {fenMAJ.settype(3);}
         
         // ActionListener avec la fenêtre d'ajout
         if(!(this.fenMAJ == null))
@@ -49,17 +46,13 @@ public class MAJ implements ActionListener{
             // AnneeScolaire
             if (fenMAJ.gettable()==1) 
             {
-                if(clic == fenMAJ.getbtn(0))
-                {
-                    new AnneeScolaireDAO(connection).Ajouter(fenMAJ); 
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
+                {   
+                        new AnneeScolaireDAO(connexion).Ajouter(fenMAJ); 
                 }
-                if(clic == fenMAJ.getbtn(1))
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
                 {
-                     new AnneeScolaireDAO(connection).Maj(fenMAJ);
-                }
-                if(clic == fenMAJ.getbtn(2))
-                {
-                    new AnneeScolaireDAO(connection).Supprimer(fenMAJ);
+                    new AnneeScolaireDAO(connexion).Supprimer(fenMAJ);
                 } 
                 
             }
@@ -67,182 +60,197 @@ public class MAJ implements ActionListener{
             // Bulletin
             if (fenMAJ.gettable()==2)
             {
-                if(clic == fenMAJ.getbtn(0))
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
                 {
-                    new BulletinDAO(connection).Ajouter(fenMAJ); 
+                    new BulletinDAO(connexion).Ajouter(fenMAJ); 
                 }
-                if(clic == fenMAJ.getbtn(1))
-                {
-                     new BulletinDAO(connection).Maj(fenMAJ);
                 }
-                if(clic == fenMAJ.getbtn(2))
+                if(fenMAJ.gettype()==2 && clic==fenMAJ.getBtnV())
                 {
-                    new BulletinDAO(connection).Supprimer(fenMAJ);
+                     new BulletinDAO(connexion).Maj(fenMAJ);
+                }
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
+                {
+                    new BulletinDAO(connexion).Supprimer(fenMAJ);
                 } 
             }
 
             // Classe
             if (fenMAJ.gettable()==3)
             {
-                if(clic == fenMAJ.getbtn(0))
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
                 {
-                    new ClasseDAO(connection).Ajouter(fenMAJ); 
+                    new ClasseDAO(connexion).Ajouter(fenMAJ); 
                 }
-                if(clic == fenMAJ.getbtn(1))
+                if(fenMAJ.gettype()==2 && clic==fenMAJ.getBtnV())
                 {
-                     new ClasseDAO(connection).Maj(fenMAJ);
+                     new ClasseDAO(connexion).Maj(fenMAJ);
                 }
-                if(clic == fenMAJ.getbtn(2))
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
                 {
-                    new ClasseDAO(connection).Supprimer(fenMAJ);
+                    new ClasseDAO(connexion).Supprimer(fenMAJ);
                 } 
             }
 
             // DetailBulletin
             if (fenMAJ.gettable()==4)
             {
-                if(clic == fenMAJ.getbtn(0))
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
                 {
-                    new DetailBulletinDAO(connection).Ajouter(fenMAJ); 
+                    new DetailBulletinDAO(connexion).Ajouter(fenMAJ); 
                 }
-                if(clic == fenMAJ.getbtn(1))
+                if(fenMAJ.gettype()==2 && clic==fenMAJ.getBtnV())
                 {
-                     new DetailBulletinDAO(connection).Maj(fenMAJ);
+                     new DetailBulletinDAO(connexion).Maj(fenMAJ);
                 }
-                if(clic == fenMAJ.getbtn(2))
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
                 {
-                    new DetailBulletinDAO(connection).Supprimer(fenMAJ);
+                    new DetailBulletinDAO(connexion).Supprimer(fenMAJ);
                 } 
             }
 
             // Discipline
             if (fenMAJ.gettable()==5)
             {
-                if(clic == fenMAJ.getbtn(0))
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
                 {
-                    new DisciplineDAO(connection).Ajouter(fenMAJ); 
+                    new DisciplineDAO(connexion).Ajouter(fenMAJ); 
                 }
-                if(clic == fenMAJ.getbtn(1))
+                if(fenMAJ.gettype()==2 && clic==fenMAJ.getBtnV())
                 {
-                     new DisciplineDAO(connection).Maj(fenMAJ);
+                     new DisciplineDAO(connexion).Maj(fenMAJ);
                 }
-                if(clic == fenMAJ.getbtn(2))
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
                 {
-                    new DisciplineDAO(connection).Supprimer(fenMAJ);
+                    new DisciplineDAO(connexion).Supprimer(fenMAJ);
                 } 
             }
 
-            // Enseignement
+            // Ecole
             if (fenMAJ.gettable()==6)
             {
-                if(clic == fenMAJ.getbtn(0))
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
                 {
-                    new EnseignementDAO(connection).Ajouter(fenMAJ); 
+                    new EcoleDAO(connexion).Ajouter(fenMAJ); 
                 }
-                if(clic == fenMAJ.getbtn(1))
+                if(fenMAJ.gettype()==2 && clic==fenMAJ.getBtnV())
                 {
-                     new EnseignementDAO(connection).Maj(fenMAJ);
+                     new EcoleDAO(connexion).Maj(fenMAJ);
                 }
-                if(clic == fenMAJ.getbtn(2))
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
                 {
-                    new EnseignementDAO(connection).Supprimer(fenMAJ);
+                    new EcoleDAO(connexion).Supprimer(fenMAJ);
+                } 
+            }
+            // Enseignement
+            if (fenMAJ.gettable()==7)
+            {
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
+                {
+                    new EnseignementDAO(connexion).Ajouter(fenMAJ); 
+                }
+                if(fenMAJ.gettype()==2 && clic==fenMAJ.getBtnV())
+                {
+                     new EnseignementDAO(connexion).Maj(fenMAJ);
+                }
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
+                {
+                    new EnseignementDAO(connexion).Supprimer(fenMAJ);
                 } 
             }
 
             // Evaluation
-            if (fenMAJ.gettable()==7)
+            if (fenMAJ.gettable()==8)
             {
-                if(clic == fenMAJ.getbtn(0))
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
                 {
-                    new EvaluationDAO(connection).Ajouter(fenMAJ); 
+                    new EvaluationDAO(connexion).Ajouter(fenMAJ); 
                 }
-                if(clic == fenMAJ.getbtn(1))
+                if(fenMAJ.gettype()==2 && clic==fenMAJ.getBtnV())
                 {
-                     new EvaluationDAO(connection).Maj(fenMAJ);
+                     new EvaluationDAO(connexion).Maj(fenMAJ);
                 }
-                if(clic == fenMAJ.getbtn(2))
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
                 {
-                    new EvaluationDAO(connection).Supprimer(fenMAJ);
+                    new EvaluationDAO(connexion).Supprimer(fenMAJ);
                 } 
             }
             
             // Inscription
-            if (fenMAJ.gettable()==8)
+            if (fenMAJ.gettable()==9)
             {
-                if(clic == fenMAJ.getbtn(0))
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
                 {
-                    new InscriptionDAO(connection).Ajouter(fenMAJ); 
+                    new InscriptionDAO(connexion).Ajouter(fenMAJ); 
                 }
-                if(clic == fenMAJ.getbtn(1))
+                if(fenMAJ.gettype()==2 && clic==fenMAJ.getBtnV())
                 {
-                     new InscriptionDAO(connection).Maj(fenMAJ);
+                     new InscriptionDAO(connexion).Maj(fenMAJ);
                 }
-                if(clic == fenMAJ.getbtn(2))
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
                 {
-                    new InscriptionDAO(connection).Supprimer(fenMAJ);
+                    new InscriptionDAO(connexion).Supprimer(fenMAJ);
                 } 
             }
             
             //Niveau
-            if (fenMAJ.gettable()==9)
+            if (fenMAJ.gettable()==10)
             {
-                if(clic == fenMAJ.getbtn(0))
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
                 {
-                    new NiveauDAO(connection).Ajouter(fenMAJ); 
+                    new NiveauDAO(connexion).Ajouter(fenMAJ); 
                 }
-                if(clic == fenMAJ.getbtn(1))
+                if(fenMAJ.gettype()==2 && clic==fenMAJ.getBtnV())
                 {
-                     new NiveauDAO(connection).Maj(fenMAJ);
+                     new NiveauDAO(connexion).Maj(fenMAJ);
                 }
-                if(clic == fenMAJ.getbtn(2))
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
                 {
-                    new NiveauDAO(connection).Supprimer(fenMAJ);
+                    new NiveauDAO(connexion).Supprimer(fenMAJ);
                 } 
             }
             
             //Personne
-            if  (fenMAJ.gettable()==10)
+            if  (fenMAJ.gettable()==11)
             {
-                if(clic == fenMAJ.getbtn(0))
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
                 {
-                    new PersonneDAO(connection).Ajouter(fenMAJ); 
+                    new PersonneDAO(connexion).Ajouter(fenMAJ); 
                 }
-                if(clic == fenMAJ.getbtn(1))
+                if(fenMAJ.gettype()==2 && clic==fenMAJ.getBtnV())
                 {
-                     new PersonneDAO(connection).Maj(fenMAJ);
+                     new PersonneDAO(connexion).Maj(fenMAJ);
                 }
-                if(clic == fenMAJ.getbtn(2))
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
                 {
-                    new PersonneDAO(connection).Supprimer(fenMAJ);
+                    new PersonneDAO(connexion).Supprimer(fenMAJ);
                 }
             }
             
             //Trimestre
-            if  (fenMAJ.gettable()==11)
+            if  (fenMAJ.gettable()==12)
             {
-                if(clic == fenMAJ.getbtn(0))
+                if(fenMAJ.gettype()==1 && clic==fenMAJ.getBtnV())
                 {
-                    new TrimestreDAO(connection).Ajouter(fenMAJ); 
+                    new TrimestreDAO(connexion).Ajouter(fenMAJ); 
                 }
-                if(clic == fenMAJ.getbtn(1))
+                if(fenMAJ.gettype()==2 && clic==fenMAJ.getBtnV())
                 {
-                     new TrimestreDAO(connection).Maj(fenMAJ);
+                     new TrimestreDAO(connexion).Maj(fenMAJ);
                 }
-                if(clic == fenMAJ.getbtn(2))
+                if(fenMAJ.gettype()==3 && clic==fenMAJ.getBtnV())
                 {
-                    new TrimestreDAO(connection).Supprimer(fenMAJ);
+                    new TrimestreDAO(connexion).Supprimer(fenMAJ);
                 }
             }
             
-            /*if(e.getSource() == fenMAJ.getretour())
+            if(e.getSource() == fenMAJ.getBtnR())
             {
-                try {
-                    fenMAJ.dispose();
-                    new FenetreAccueil(connection);
-                } catch (SQLException ex) {Logger.getLogger(ButtonController.class.getName()).log(Level.SEVERE, null, ex);}
-            }*/
+                fenMAJ.dispose();
+                new FenetreAccueil(connexion);
+            }
            
         }
-    }
+
     
 }

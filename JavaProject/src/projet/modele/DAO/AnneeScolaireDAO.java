@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projet.controleur.Connexion;
 import projet.modele.AnneeScolaire;
 import projet.view.FenetreAccueil;
 import projet.view.FenetreMAJ;
@@ -23,9 +24,11 @@ import projet.view.FenetreMAJ;
 public class AnneeScolaireDAO  extends DAO<AnneeScolaire>{
 
     private FenetreMAJ fenetre;
+    private Connexion connect;
     
-    public AnneeScolaireDAO(Connection conn) {
-        super(conn);
+    public AnneeScolaireDAO(Connexion conn) {
+        super(conn.getConn());
+        this.connect = conn;
     }
     
     public void Ajouter(FenetreMAJ ajout)
@@ -33,38 +36,23 @@ public class AnneeScolaireDAO  extends DAO<AnneeScolaire>{
         this.fenetre = ajout;
         try 
         {
-            Statement stmt = connect.createStatement();
-            String requete = "INSERT INTO AnnéeScolaire VALUE ('"+ fenetre.getEcrireType().get(0).getText()+"')"; 
+            Statement stmt = connect.getConn().createStatement();
+            String requete = "INSERT INTO AnnéeScolaire VALUE ('"+ fenetre.getEcrireId().getText()+"')"; 
             stmt.executeUpdate(requete);
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();   
         } catch (SQLException ex) 
         {Logger.getLogger(FenetreMAJ.class.getName()).log(Level.SEVERE, null, ex);}
     }
-
-    public void Maj(FenetreMAJ modif)
-    {
-        this.fenetre = modif;
-        try 
-        {
-            Statement stmt = connect.createStatement();
-            //int Rs = stmt.executeUpdate("UPDATE `AnnéeScolaire` SET `id`='"+fenetre.getComboBoxChambre().getSelectedItem()+"' WHERE id = '"+fenetre.getitem1()+"'";
-            new FenetreAccueil(connect).setVisible(true);
-            fenetre.dispose();   
-        } catch (SQLException ex) {
-            Logger.getLogger(FenetreMAJ.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
     
     public void Supprimer(FenetreMAJ supp) {
         this.fenetre = supp;
         try 
         {
-            Statement stmt = connect.createStatement();
-            int Rs = stmt.executeUpdate("DELETE FROM `AnnéeScolaire` WHERE id = '"+ fenetre.getEcrireType().get(0).getText()+"'");      
-            Rs = stmt.executeUpdate("DELETE FROM `Trimestre` WHERE annéescolaire_id = '"+ fenetre.getEcrireType().get(0).getText()+"'");
-            Rs = stmt.executeUpdate("DELETE FROM `Classe` WHERE annéescolaire_id = '"+ fenetre.getEcrireType().get(0).getText()+"'");
+            Statement stmt = connect.getConn().createStatement();
+            int Rs = stmt.executeUpdate("DELETE FROM `AnnéeScolaire` WHERE id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");      
+            Rs = stmt.executeUpdate("DELETE FROM `Trimestre` WHERE annéescolaire_id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");
+            Rs = stmt.executeUpdate("DELETE FROM `Classe` WHERE annéescolaire_id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose(); 
         } catch (SQLException ex) {
@@ -83,7 +71,7 @@ public class AnneeScolaireDAO  extends DAO<AnneeScolaire>{
     }
       
     @Override
-    public boolean supprimer(AnneeScolaire obj) {
+public boolean supprimer(AnneeScolaire obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -92,7 +80,7 @@ public class AnneeScolaireDAO  extends DAO<AnneeScolaire>{
             AnneeScolaire annee = new AnneeScolaire();  
 
     try {
-      ResultSet result = this.connect.createStatement(
+      ResultSet result = this.connect.getConn().createStatement(
         ResultSet.TYPE_SCROLL_INSENSITIVE, 
         ResultSet.CONCUR_READ_ONLY
       ).executeQuery("SELECT * FROM AnnéeScolaire WHERE id = " + id);// faire requete sql et remplir

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projet.controleur.Connexion;
 import projet.modele.Discipline;
 import projet.view.FenetreAccueil;
 import projet.view.FenetreMAJ;
@@ -22,9 +23,11 @@ import projet.view.FenetreMAJ;
 public class DisciplineDAO  extends DAO<Discipline>{
     
     private FenetreMAJ fenetre;
+    private Connexion connect;
 
-    public DisciplineDAO(Connection conn) {
-        super(conn);
+    public DisciplineDAO(Connexion conn) {
+        super(conn.getConn());
+        this.connect = conn;
     }
 
       public void Ajouter(FenetreMAJ ajout)
@@ -32,8 +35,8 @@ public class DisciplineDAO  extends DAO<Discipline>{
         this.fenetre = ajout;
         try 
         {
-            Statement stmt = connect.createStatement();
-                String requete = "INSERT INTO Discipline VALUES ('"+fenetre.getEcrireType().get(0).getText()+"', '"+fenetre.getEcrireType().get(1).getText()+"')";
+            Statement stmt = connect.getConn().createStatement();
+                String requete = "INSERT INTO Discipline VALUES ('"+ fenetre.getEcrireId().getText()+"', '"+ fenetre.getEcrireInfo1().getText()+"')";
             stmt.executeUpdate(requete);
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();   
@@ -46,8 +49,8 @@ public class DisciplineDAO  extends DAO<Discipline>{
         this.fenetre = modif;
         try 
         {
-            Statement stmt = connect.createStatement();
-            //int Rs = stmt.executeUpdate("UPDATE `Discipline` SET `id`='"+fenetre.getComboBoxChambre().getSelectedItem()+"',`nom`='"+fenetre.getJTexField(1).getText()+"', WHERE id = '"+fenetre.getitem1()+"'";
+            Statement stmt = connect.getConn().createStatement();
+            int Rs = stmt.executeUpdate("UPDATE `Discipline` SET `nom`='"+ fenetre.getEcrireInfo1().getText()+"' WHERE id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();   
         } catch (SQLException ex) {
@@ -61,9 +64,9 @@ public class DisciplineDAO  extends DAO<Discipline>{
         this.fenetre = supp;
         try 
         {
-        Statement stmt = this.connect.createStatement();
-        int Rs = stmt.executeUpdate("DELETE FROM `Discipline` WHERE id = '"+fenetre.getEcrireType().get(0).getText()+"'");      
-        Rs = stmt.executeUpdate("DELETE FROM `Enseignement` WHERE discipline_id = '"+fenetre.getEcrireType().get(0).getText()+"'");
+        Statement stmt = this.connect.getConn().createStatement();
+        int Rs = stmt.executeUpdate("DELETE FROM `Discipline` WHERE id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");      
+        Rs = stmt.executeUpdate("DELETE FROM `Enseignement` WHERE discipline_id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");
         new FenetreAccueil(connect).setVisible(true);
         fenetre.dispose();   
         } catch (SQLException ex) {
@@ -91,7 +94,7 @@ public class DisciplineDAO  extends DAO<Discipline>{
         Discipline discipline = new Discipline();  
 
     try {
-      ResultSet result = this.connect.createStatement(
+      ResultSet result = this.connect.getConn().createStatement(
         ResultSet.TYPE_SCROLL_INSENSITIVE, 
         ResultSet.CONCUR_READ_ONLY
       ).executeQuery("SELECT * FROM Discipline WHERE id = " + id);// faire requete sql et remplir

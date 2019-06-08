@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projet.controleur.Connexion;
 import projet.modele.Trimestre;
 import projet.view.FenetreAccueil;
 import projet.view.FenetreMAJ;
@@ -23,9 +24,11 @@ import projet.view.FenetreMAJ;
 public class TrimestreDAO  extends DAO<Trimestre>{
     
     private FenetreMAJ fenetre;
+    private Connexion connect;
 
-    public TrimestreDAO(Connection conn) {
-        super(conn);
+    public TrimestreDAO(Connexion conn) {
+        super(conn.getConn());
+        this.connect = conn;
     }
     
      public void Ajouter(FenetreMAJ ajout)
@@ -33,8 +36,8 @@ public class TrimestreDAO  extends DAO<Trimestre>{
         this.fenetre = ajout;
         try 
         {
-            Statement stmt = connect.createStatement();
-            String requete = "INSERT INTO Trimestre VALUES ('"+fenetre.getEcrireType().get(0).getText()+"', '"+fenetre.getEcrireType().get(1).getText()+"', '"+fenetre.getEcrireType().get(2).getText()+"', '"+fenetre.getEcrireType().get(3).getText()+"', '"+fenetre.getEcrireType().get(4).getText()+"')";
+            Statement stmt = connect.getConn().createStatement();
+            String requete = "INSERT INTO Trimestre VALUES ('"+ fenetre.getEcrireId().getText()+"', '"+ fenetre.getEcrireInfo1().getText()+"', '"+ fenetre.getEcrireInfo2().getText()+"', '"+ fenetre.getEcrireInfo3().getText()+"', '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"')";
             stmt.executeUpdate(requete);
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();   
@@ -47,8 +50,8 @@ public class TrimestreDAO  extends DAO<Trimestre>{
         this.fenetre = modif;
         try 
         {
-            Statement stmt = connect.createStatement();
-            //int Rs = stmt.executeUpdate("UPDATE `Trimestre` SET `id`='"+fenetre.getComboBoxChambre().getSelectedItem()+"',`numéro`='"+fenetre.getJTexField(1).getText()+"',`début`='"+fenetre.getJTexField(2).getText()+"',`fin`='"+fenetre.getJTexField(3).getText()+"',`annéescolaire_id`='"+fenetre.getJTexField(4).getText()+"', WHERE id = '"+fenetre.getitem1()+"'";
+            Statement stmt = connect.getConn().createStatement();
+            int Rs = stmt.executeUpdate("UPDATE `Trimestre` SET `numéro`='"+ fenetre.getEcrireInfo1().getText()+"',`début`='"+ fenetre.getEcrireInfo2().getText()+"',`fin`='"+ fenetre.getEcrireInfo3().getText()+"',`annéescolaire_id`='"+fenetre.getSelectInfo2().getSelectedItem().toString()+"' WHERE id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();   
         } catch (SQLException ex) {
@@ -61,9 +64,9 @@ public class TrimestreDAO  extends DAO<Trimestre>{
         this.fenetre = supp;
         try 
         {
-            Statement stmt = this.connect.createStatement();
-            int Rs = stmt.executeUpdate("DELETE FROM `Trimestre` WHERE id = '"+fenetre.getEcrireType().get(0).getText()+"'");      
-            Rs = stmt.executeUpdate("DELETE FROM `Bulletin` WHERE trimestre_id = '"+fenetre.getEcrireType().get(0).getText()+"'");
+            Statement stmt = this.connect.getConn().createStatement();
+            int Rs = stmt.executeUpdate("DELETE FROM `Trimestre` WHERE id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");      
+            Rs = stmt.executeUpdate("DELETE FROM `Bulletin` WHERE trimestre_id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();
              } catch (SQLException ex) {
@@ -91,7 +94,7 @@ public class TrimestreDAO  extends DAO<Trimestre>{
     Trimestre trimestre = new Trimestre();  
 
     try {
-      ResultSet result = this.connect.createStatement(
+      ResultSet result = this.connect.getConn().createStatement(
         ResultSet.TYPE_SCROLL_INSENSITIVE, 
         ResultSet.CONCUR_READ_ONLY
       ).executeQuery("SELECT * FROM Trimestre WHERE id = " + id);// faire requete sql et remplir

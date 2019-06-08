@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projet.controleur.Connexion;
 import projet.modele.Ecole;
 import projet.view.FenetreAccueil;
 import projet.view.FenetreMAJ;
@@ -22,9 +23,11 @@ import projet.view.FenetreMAJ;
 public class EcoleDAO  extends DAO<Ecole>{
     
     private FenetreMAJ fenetre;
+    private Connexion connect;
 
-    public EcoleDAO(Connection conn) {
-        super(conn);
+    public EcoleDAO(Connexion conn) {
+        super(conn.getConn());
+        this.connect = conn;
     }
 
      public void Ajouter(FenetreMAJ ajout)
@@ -32,8 +35,8 @@ public class EcoleDAO  extends DAO<Ecole>{
         this.fenetre = ajout;
         try 
         {
-            Statement stmt = connect.createStatement();
-            String requete = "INSERT INTO Ecole VALUES ('"+fenetre.getEcrireType().get(0).getText()+"', '"+fenetre.getEcrireType().get(1).getText()+"')";
+            Statement stmt = connect.getConn().createStatement();
+            String requete = "INSERT INTO Ecole VALUES ('"+ fenetre.getEcrireId().getText()+"', '"+ fenetre.getEcrireInfo1().getText()+"')";
             stmt.executeUpdate(requete);
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();   
@@ -45,8 +48,8 @@ public class EcoleDAO  extends DAO<Ecole>{
         this.fenetre = modif;
         try 
         {
-            Statement stmt = connect.createStatement();
-            //int Rs = stmt.executeUpdate("UPDATE `Ecole` SET `id`='"+fenetre.getComboBoxChambre().getSelectedItem()+"',`nom`='"+fenetre.getJTexField(1).getText()+"', WHERE id = '"+fenetre.getitem1()+"'";
+            Statement stmt = connect.getConn().createStatement();
+            int Rs = stmt.executeUpdate("UPDATE `Ecole` SET `nom`='"+ fenetre.getEcrireInfo1().getText()+"' WHERE id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();   
         } catch (SQLException ex) {
@@ -60,9 +63,9 @@ public class EcoleDAO  extends DAO<Ecole>{
         this.fenetre = supp;
         try 
         {
-        Statement stmt = this.connect.createStatement();
-        int Rs = stmt.executeUpdate("DELETE FROM `Ecole` WHERE id = '"+fenetre.getEcrireType().get(0).getText()+"'");      
-        Rs = stmt.executeUpdate("DELETE FROM `Classe` WHERE école_id = '"+fenetre.getEcrireType().get(0).getText()+"'");
+        Statement stmt = this.connect.getConn().createStatement();
+        int Rs = stmt.executeUpdate("DELETE FROM `Ecole` WHERE id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");      
+        Rs = stmt.executeUpdate("DELETE FROM `Classe` WHERE école_id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");
         new FenetreAccueil(connect).setVisible(true);
         fenetre.dispose();   
          
@@ -91,7 +94,7 @@ public class EcoleDAO  extends DAO<Ecole>{
     Ecole ecole = new Ecole();  
 
     try {
-      ResultSet result = this.connect.createStatement(
+      ResultSet result = this.connect.getConn().createStatement(
         ResultSet.TYPE_SCROLL_INSENSITIVE, 
         ResultSet.CONCUR_READ_ONLY
       ).executeQuery("SELECT * FROM Ecole WHERE id = " + id);// faire requete sql et remplir

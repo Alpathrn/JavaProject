@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import projet.controleur.Connexion;
 import projet.modele.Evaluation;
 import projet.view.FenetreAccueil;
 import projet.view.FenetreMAJ;
@@ -22,9 +23,11 @@ import projet.view.FenetreMAJ;
 public class EvaluationDAO  extends DAO<Evaluation>{
     
     private FenetreMAJ fenetre;
+    private Connexion connect;
 
-    public EvaluationDAO(Connection conn) {
-        super(conn);
+    public EvaluationDAO(Connexion conn) {
+        super(conn.getConn());
+        this.connect = conn;
     }
 
     public void Ajouter(FenetreMAJ ajout)
@@ -32,8 +35,8 @@ public class EvaluationDAO  extends DAO<Evaluation>{
         this.fenetre = ajout;
         try 
         {
-            Statement stmt = connect.createStatement();
-            String requete = "INSERT INTO Evaluation VALUES ('"+fenetre.getEcrireType().get(0).getText()+"', '"+fenetre.getEcrireType().get(1).getText()+"', '"+fenetre.getEcrireType().get(2).getText()+"', '"+fenetre.getEcrireType().get(3).getText()+"')";
+            Statement stmt = connect.getConn().createStatement();
+            String requete = "INSERT INTO Evaluation VALUES ('"+ fenetre.getEcrireId().getText()+"', '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"', '"+ fenetre.getEcrireInfo1().getText()+"', '"+ fenetre.getEcrireInfo2().getText()+"')";
             stmt.executeUpdate(requete);
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();   
@@ -46,8 +49,8 @@ public class EvaluationDAO  extends DAO<Evaluation>{
         this.fenetre = modif;
         try 
         {
-            Statement stmt = connect.createStatement();
-            //int Rs = stmt.executeUpdate("UPDATE `Evaluation` SET `id`='"+fenetre.getComboBoxChambre().getSelectedItem()+"',`detailbulletin_id`='"+fenetre.getJTexField(1).getText()+"',`note`='"+fenetre.getJTexField(2).getText()+"',`appréciation`='"+fenetre.getJTexField(3).getText()+"', WHERE id = '"+fenetre.getitem1()+"'";
+            Statement stmt = connect.getConn().createStatement();
+            int Rs = stmt.executeUpdate("UPDATE `Evaluation` SET `detailbulletin_id`='"+fenetre.getSelectInfo2().getSelectedItem().toString()+"',`note`='"+ fenetre.getEcrireInfo1().getText()+"',`appréciation`='"+ fenetre.getEcrireInfo2().getText()+"' WHERE id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'");
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();   
         } catch (SQLException ex) {
@@ -61,8 +64,8 @@ public class EvaluationDAO  extends DAO<Evaluation>{
         this.fenetre = supp;
         try 
         {
-            Statement stmt = this.connect.createStatement();
-            int Rs = stmt.executeUpdate("DELETE FROM `Evaluation` WHERE id = '"+fenetre.getEcrireType().get(0).getText()+"'"); 
+            Statement stmt = this.connect.getConn().createStatement();
+            int Rs = stmt.executeUpdate("DELETE FROM `Evaluation` WHERE id = '"+fenetre.getSelectInfo1().getSelectedItem().toString()+"'"); 
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();  
             } catch (SQLException ex) {
@@ -90,7 +93,7 @@ public class EvaluationDAO  extends DAO<Evaluation>{
      Evaluation evaluation = new Evaluation();  
 
     try {
-      ResultSet result = this.connect.createStatement(
+      ResultSet result = this.connect.getConn().createStatement(
         ResultSet.TYPE_SCROLL_INSENSITIVE, 
         ResultSet.CONCUR_READ_ONLY
       ).executeQuery("SELECT * FROM Evaluation WHERE id = " + id);// faire requete sql et remplir

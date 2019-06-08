@@ -5,10 +5,13 @@
  */
 package projet.view;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import projet.controleur.Connexion;
 
@@ -21,12 +24,16 @@ public class FenetreAccueil extends JFrame implements ActionListener{
     private JButton btnMAJ, btnRecherche, btnReporting, btnVisualisation, btnConnexion; 
     private Connexion connexion;    
     private JPanel Accueil = new JPanel();
-
+    private JLabel image;
        
     public FenetreAccueil (Connexion con) { 
         
         super("Accueil");
-        this.setSize(900, 500);  
+        
+        image = new JLabel( new ImageIcon( "Accueil.jpg"));
+        image.setLayout( new FlowLayout());
+        
+        this.setSize(1200, 600);  
         this.connexion = con;
         this.btnMAJ= new JButton("Mise à jour"); 
         this.btnRecherche = new JButton("Recherche"); 
@@ -34,7 +41,9 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         this.btnVisualisation = new JButton("Visualisation");  
         this.btnConnexion = new JButton("Connexion"); 
         boutonsAccueil();    
-        this.getContentPane().add(Accueil);
+        
+        this.add(image);
+        //this.getContentPane().add(Accueil);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -51,11 +60,12 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         btnVisualisation.addActionListener(this);
         btnReporting.addActionListener(this);
         btnConnexion.addActionListener(this);
-        Accueil.add(btnMAJ);
-        Accueil.add(btnRecherche);
-        Accueil.add(btnReporting);
-        Accueil.add(btnVisualisation);
-        Accueil.add(btnConnexion);
+        
+        image.add(btnMAJ);
+        image.add(btnRecherche);
+        image.add(btnReporting);
+        image.add(btnVisualisation);
+        image.add(btnConnexion);
     }
 
     @Override
@@ -67,7 +77,7 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         {
             
             this.setVisible(false);
-            new FenetreMAJ(connexion.getConn()).setVisible(true);
+            new FenetreMAJ(connexion).setVisible(true);
             
         }
         else if(clic == btnRecherche) // accès à la fenêtre de mise à jour
