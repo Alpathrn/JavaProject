@@ -101,8 +101,6 @@ public class BulletinDAO  extends DAO<Bulletin>{
     }
     return bulletin;
   } 
-
-
 }
     
 

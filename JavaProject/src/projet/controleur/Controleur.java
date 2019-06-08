@@ -23,7 +23,7 @@ public class Controleur {
         } catch (SQLException ex) {
             Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        Connection conn = null;
+        Connexion conn = new Connexion();
         new FenetreAccueil(conn).setVisible(true);
     }
 }

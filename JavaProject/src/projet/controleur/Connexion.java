@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.ArrayList;
 import java.sql.Connection;
-import javax.swing.JOptionPane;
 
 /**
  * 
@@ -65,25 +64,10 @@ public class Connexion implements ActionListener{
 
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement();
-                        
-        //new FenetreAccueil(conn).setVisible(true);
     }
-        
-    public Connexion() throws SQLException
-    {  
-        try {
-            try {
-                Connexion connexion = new Connexion("javaproject", "root", "root", "3306");
-                JOptionPane.showMessageDialog(null, "Connexion à la BDD réussie!");
-
-            } catch (ClassNotFoundException cnfe) {
-                JOptionPane.showMessageDialog(null, "Connexion à la BDD échouée, problème de classe.");
-                cnfe.printStackTrace();
-            }
-        } catch (SQLException exp) {
-            JOptionPane.showMessageDialog(null, "Connexion à la BDD échouée, ??? n'existe pas.");
-            exp.printStackTrace();
-        }
+    
+    public Connexion(){
+        conn=null;
     }
 
     /**
@@ -204,5 +188,24 @@ public class Connexion implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Connection getConn(){
+        return conn;
+    }
+    
+    public Statement getStmt(){
+        return stmt;
+    }
+    
+    public ResultSet getRset(){
+        return rset;
+    }
+    public ResultSetMetaData getrsetMeta(){
+        return rsetMeta;
+    }
+    
+    public void setRset(ResultSet m_rset){
+        rset = m_rset;
     }
 }

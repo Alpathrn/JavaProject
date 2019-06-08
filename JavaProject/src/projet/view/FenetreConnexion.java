@@ -5,6 +5,8 @@
  */
 package projet.view;
 
+import java.awt.BorderLayout;
+import static java.awt.BorderLayout.SOUTH;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -26,14 +28,15 @@ public class FenetreConnexion extends JFrame{
     private JLabel lbl_nom, lbl_login, lbl_mdp, lbl_port;
     private JTextField text_nom, text_login, text_port; 
     private final JPanel page = new JPanel();
+    //private JPanel Retour = new JPanel();
     private JPasswordField pw_mdp;
-    private JButton btn_local;
+    private JButton btn_local;//, btn_retour;
     static Connexion maconnexion;
     
     public FenetreConnexion()
     {
         super("Connexion");
-        setTitle("Connexion a la BDD"); 
+        setTitle("Connexion a la BDD");
 	setSize(900, 500);
 
         lbl_nom = new JLabel("Nom de la BDD:");
@@ -72,6 +75,8 @@ public class FenetreConnexion extends JFrame{
                     try {
                         maconnexion = new Connexion(text_nom.getText(), text_login.getText(), pw_mdp.getText().toString(), text_port.getText());
                         JOptionPane.showMessageDialog(null, "Connexion à la BDD " + text_nom.getText() + " réussie!");
+                        new FenetreAccueil(maconnexion).setVisible(true);
+                        setVisible(false);
                     } catch (ClassNotFoundException cnfe) {
                         JOptionPane.showMessageDialog(null, "Connexion à la BDD échouée, problème de classe.");
                         cnfe.printStackTrace();
@@ -83,6 +88,7 @@ public class FenetreConnexion extends JFrame{
             }
         }); 
         
-        this.add(page);
+        this.getContentPane().add(page);      
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

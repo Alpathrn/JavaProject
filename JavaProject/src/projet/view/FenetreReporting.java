@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import projet.controleur.Connexion;
 import projet.controleur.Reporting;
 
 /**
@@ -26,18 +27,18 @@ public class FenetreReporting extends JFrame {
     private JPanel Nom = new JPanel();
    // private JPanel GRAPHE = new JPanel();
     private JPanel Retour = new JPanel();
-    private Connection connection;    
+    private Connexion connexion;    
     private JButton btn[];
     private JRadioButton camenbert;
     private JRadioButton barre;
     private JLabel titre = new JLabel();
     
 
-    public FenetreReporting(Connection con)
+    public FenetreReporting(Connexion con)
     {
         super("Reporting");
         this.setSize(900, 500);  
-        this.connection = con;
+        this.connexion = con;
         this.btn = new JButton[5];
         this.camenbert = new JRadioButton("Camembert");
         this.barre = new JRadioButton("Histogramme");
@@ -56,7 +57,7 @@ public class FenetreReporting extends JFrame {
         
         for(int i = 0; i < 5 ; i++)
         {
-            btn[i].addActionListener(new Reporting(this,connection));
+            btn[i].addActionListener(new Reporting(this,connexion));
         }
         
         this.setLayout(new BorderLayout());

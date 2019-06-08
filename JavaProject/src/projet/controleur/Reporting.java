@@ -25,17 +25,17 @@ import projet.view.FenetreAccueil;
 public class Reporting implements ActionListener{
     
      private FenetreReporting fenreport;
-     private Connection connection;
+     private Connexion connexion;
      
      /**
      * Constructeur pour la fenêtre de reporting
      * @param fenetre
      * @param conn
      */
-    public Reporting(FenetreReporting fenetre, Connection conn)
+    public Reporting(FenetreReporting fenetre, Connexion conn)
     {
         this.fenreport = fenetre;
-        this.connection = conn;    
+        this.connexion = conn;    
     }
     
     @Override
@@ -45,7 +45,7 @@ public class Reporting implements ActionListener{
             {   
                 try 
                 {
-                    Statement stmt = connection.createStatement();
+                    Statement stmt = connexion.getConn().createStatement();
                     ResultSet resultat = stmt.executeQuery("SELECT (SELECT COUNT(*) FROM Classe WHERE école_id = '1') as result1, (SELECT COUNT(*) FROM Classe WHERE école_id = '2') as result2, (SELECT COUNT(*) FROM Classe WHERE école_id = '3') as result3");
                     resultat.next();                
                     String newStrData[]={"ECE_Paris","ECE_Tech","ECE_Lyon"};
@@ -73,7 +73,7 @@ public class Reporting implements ActionListener{
             {   
                 try 
                 {
-                    Statement stmt = connection.createStatement();
+                    Statement stmt = connexion.getConn().createStatement();
                     ResultSet resultat = stmt.executeQuery("SELECT (SELECT COUNT(*) FROM Enseignement WHERE classe_id = '1') as result1, (SELECT COUNT(*) FROM Enseignement WHERE classe_id = '3') as result2, (SELECT COUNT(*) FROM Enseignement WHERE classe_id = '4') as result3");
                     resultat.next();                
                     String newStrData[]={"TD1","TD3","TD4"};
@@ -99,7 +99,7 @@ public class Reporting implements ActionListener{
             if(e.getSource() == fenreport.getbtn(2))
             {   
                 try {
-                        Statement stmt = connection.createStatement();
+                        Statement stmt = connexion.getConn().createStatement();
                         ResultSet resultat = stmt.executeQuery("SELECT (SELECT COUNT(*) FROM Inscription WHERE classe_id = '1') as result1, (SELECT COUNT(*) FROM Inscription WHERE classe_id = '2') as result2, (SELECT COUNT(*) FROM Inscription WHERE classe_id = '3') as result3 ");
                         resultat.next(); 
 
@@ -125,9 +125,8 @@ public class Reporting implements ActionListener{
 
             if(e.getSource() == fenreport.getbtn(3))
             {   
-                new FenetreAccueil(connection).setVisible(true);
+                new FenetreAccueil(connexion).setVisible(true);
                 fenreport.dispose();
             }
-        
     }
 }

@@ -5,13 +5,12 @@
  */
 package projet.view;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import projet.controleur.Connexion;
 
 /**
  *
@@ -20,15 +19,15 @@ import javax.swing.JPanel;
 public class FenetreAccueil extends JFrame implements ActionListener{
     
     private JButton btnMAJ, btnRecherche, btnReporting, btnVisualisation, btnConnexion; 
-    private Connection connection;    
+    private Connexion connexion;    
     private JPanel Accueil = new JPanel();
 
        
-    public FenetreAccueil (Connection con) { 
+    public FenetreAccueil (Connexion con) { 
         
         super("Accueil");
         this.setSize(900, 500);  
-        this.connection = con;
+        this.connexion = con;
         this.btnMAJ= new JButton("Mise à jour"); 
         this.btnRecherche = new JButton("Recherche"); 
         this.btnReporting = new JButton("Reporting");
@@ -37,7 +36,7 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         boutonsAccueil();    
         this.getContentPane().add(Accueil);
         this.setVisible(true);
-        
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     private void boutonsAccueil()
@@ -68,26 +67,25 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         {
             
             this.setVisible(false);
-            new FenetreMAJ(connection).setVisible(true);
+            new FenetreMAJ(connexion.getConn()).setVisible(true);
             
         }
         else if(clic == btnRecherche) // accès à la fenêtre de mise à jour
         {
            this.setVisible(false);
-            new FenetreRecherche(connection).setVisible(true);
+            new FenetreRecherche(connexion.getConn()).setVisible(true);
 
         }
         else if(clic == btnReporting) // accès à la fenêtre de recherche
         {
             this.setVisible(false);
-            new FenetreReporting(connection).setVisible(true);
+            new FenetreReporting(connexion).setVisible(true);
 
         }
         else if(clic == btnVisualisation) // accès à la fenêtre de requêtes
         {
-            /*
-                new FenetreVisualisation(connection).setVisible(true);
-            */
+            this.setVisible(false);
+            new FenetreVisualisation(connexion).setVisible(true);
         }
         else if(clic == btnConnexion) //acces a la fenetre de connexion
         {

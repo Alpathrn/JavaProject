@@ -12,14 +12,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import projet.modele.ModeleReporting;
 import projet.view.FenetreAccueil;
 import projet.view.FenetreRecherche;
-import projet.view.FenetreReporting;
 
 /**
  *
