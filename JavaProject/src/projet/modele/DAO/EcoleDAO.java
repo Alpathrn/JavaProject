@@ -75,21 +75,6 @@ public class EcoleDAO  extends DAO<Ecole>{
     }
 
     @Override
-    public boolean ajouter(Ecole obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean modifier(Ecole obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean supprimer(Ecole obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Ecole recuperer(String id) {
     Ecole ecole = new Ecole();  
 

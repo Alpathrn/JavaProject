@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,7 +34,6 @@ import projet.controleur.*;
  */
 public class FenetreMAJ extends JFrame{
   
-   // private JPanel fondAccueil = new JPanel();
     private Connexion connexion;  
     private JComboBox<String> choixTable;
     private JComboBox<String> TypePersonne;
@@ -55,21 +53,21 @@ public class FenetreMAJ extends JFrame{
     private GridLayout grille;
     private JLabel image;
     private JPanel crayon = new JPanel();
+    private JPanel traitement = new JPanel();
     
     public FenetreMAJ (Connexion con) {
        
         super("MAJ");
         JPanel Action = new JPanel();
-        JPanel traitement = new JPanel();
         JPanel Retour = new JPanel();
-        this.setSize(900, 500); 
+        this.setSize(900,500); 
         this.connexion = con;
         this.btn = new JButton[3];
         this.btnV = new JButton();
         this.btnR = new JButton();
         Dimension d = new Dimension(50,50);
         
-        image = new JLabel( new ImageIcon( "crayon.png"));
+        image = new JLabel( new ImageIcon( "crayonMAJ.png"));
         
         for(int i = 0 ; i < 3 ; i++)
         {
@@ -90,7 +88,7 @@ public class FenetreMAJ extends JFrame{
         btnV.setSize(d);
         btnV.addActionListener(new MAJ(this,connexion));
         
-        btnR.setText("Retour");
+        btnR.setText("Retour à l'Accueil");
         btnR.setSize(d);
         btnR.addActionListener(new MAJ(this,connexion));
         
@@ -204,12 +202,16 @@ public class FenetreMAJ extends JFrame{
     public void selectionCriteres(JPanel ecrire) throws SQLException 
     {
         ecrire.setBackground(new Color(212,231,255));
+        
         // création ou remise à zéro du champs de texte 
-
+        if(ecrire!=null)
+        ecrire.removeAll();
+        
         if(EcrireId!=null)
             EcrireId.removeAll();
         else
             EcrireId = new JTextField();
+        EcrireId.setPreferredSize( new Dimension( 2, 24 ) );
         
         if(EcrireInfo1!=null)
             EcrireInfo1.removeAll();
@@ -237,7 +239,6 @@ public class FenetreMAJ extends JFrame{
                 ecrire.add(new JLabel("ID:"));
                 ecrire.add(EcrireId); 
                 EcrireId.addMouseListener(new MouseAdapter() {public void mouseExited(MouseEvent evt) {SiExiste(evt,"AnnéeScolaire");}});
-    
                 }
                 if(type==2)
                 {
@@ -270,7 +271,6 @@ public class FenetreMAJ extends JFrame{
                 ecrire.add(new JLabel("Appreciation:"));
                 ecrire.add(EcrireInfo1);
                 EcrireId.addMouseListener(new MouseAdapter() {public void mouseExited(MouseEvent evt) {SiExiste(evt,"Bulletin");}});
-
                 }
                 if(type==2)
                 {
@@ -286,8 +286,7 @@ public class FenetreMAJ extends JFrame{
                 recupID("Inscription",SelectInfo3);
                 ecrire.add(SelectInfo3);
                 ecrire.add(new JLabel("Appreciation:"));
-                ecrire.add(EcrireInfo1);
-                    
+                ecrire.add(EcrireInfo1);  
                 }
                 if(type==3)
                 {
@@ -338,8 +337,7 @@ public class FenetreMAJ extends JFrame{
                 ecrire.add(SelectInfo3);
                 ecrire.add(new JLabel("ID Année Scolaire:"));
                 recupID("AnneeScolaire",SelectInfo4);
-                ecrire.add(SelectInfo4);
-                    
+                ecrire.add(SelectInfo4);   
                 }
                 if(type==3)
                 {
@@ -798,5 +796,6 @@ public class FenetreMAJ extends JFrame{
     public JComboBox<String> getTypePersonne() {
         return TypePersonne;
     }
+    
     
 }

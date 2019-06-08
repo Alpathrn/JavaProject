@@ -5,6 +5,7 @@
  */
 package projet.modele.DAO;
 import java.sql.Connection;
+import projet.view.FenetreMAJ;
 
 /**
  *
@@ -14,6 +15,8 @@ import java.sql.Connection;
  */
 
 public abstract class DAO<T> {
+    
+        private FenetreMAJ fenetre;
   protected Connection connect = null;
    
   public DAO(Connection conn){
@@ -25,21 +28,21 @@ public abstract class DAO<T> {
   * @param obj
   * @return boolean 
   */
-  public abstract boolean ajouter(T obj);
+  public abstract void Ajouter(FenetreMAJ ajout);
 
   /**
   * Méthode pour effacer
   * @param obj
   * @return boolean 
   */
-  public abstract boolean supprimer(T obj);
+  public abstract void Supprimer(FenetreMAJ ajout);
 
   /**
   * Méthode de mise à jour
   * @param obj
   * @return boolean
   */
-  public abstract boolean modifier(T obj);
+  public abstract void Maj(FenetreMAJ ajout);
 
   /**
   * Méthode de recherche des informations

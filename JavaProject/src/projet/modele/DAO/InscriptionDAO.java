@@ -75,21 +75,6 @@ public class InscriptionDAO  extends DAO<Inscription>{
     }
 
     @Override
-    public boolean ajouter(Inscription obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean modifier(Inscription obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean supprimer(Inscription obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Inscription recuperer(String id) {
     Inscription inscription = new Inscription();  
 

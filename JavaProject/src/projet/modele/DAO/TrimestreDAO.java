@@ -75,21 +75,6 @@ public class TrimestreDAO  extends DAO<Trimestre>{
     }
 
     @Override
-    public boolean ajouter(Trimestre obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean modifier(Trimestre obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean supprimer(Trimestre obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Trimestre recuperer(String id) {
     Trimestre trimestre = new Trimestre();  
 

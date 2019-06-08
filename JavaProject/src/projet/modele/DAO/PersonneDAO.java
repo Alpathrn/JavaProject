@@ -77,21 +77,6 @@ public class PersonneDAO  extends DAO<Personne>{
          }
 
     @Override
-    public boolean ajouter(Personne obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean modifier(Personne obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean supprimer(Personne obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Personne recuperer(String id) {
     Personne personne = new Personne();  
 

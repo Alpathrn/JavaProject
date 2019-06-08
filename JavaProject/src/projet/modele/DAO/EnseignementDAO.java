@@ -74,21 +74,6 @@ public class EnseignementDAO  extends DAO<Enseignement>{
     }
     
     @Override
-    public boolean ajouter(Enseignement obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean modifier(Enseignement obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean supprimer(Enseignement obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Enseignement recuperer(String id) {
     Enseignement enseignement = new Enseignement();  
 

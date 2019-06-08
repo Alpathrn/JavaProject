@@ -73,21 +73,7 @@ public class EvaluationDAO  extends DAO<Evaluation>{
          }
     }
 
-    @Override
-    public boolean ajouter(Evaluation obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean modifier(Evaluation obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean supprimer(Evaluation obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+   
     @Override
     public Evaluation recuperer(String id) {
      Evaluation evaluation = new Evaluation();  

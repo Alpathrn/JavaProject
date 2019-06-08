@@ -58,17 +58,18 @@ public class ModeleReporting extends JPanel
         {
             pieDataset.setValue(NomVariables[i]+" = "+ValeurVariables[i],ValeurVariables[i]); 
         }
+        
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i <NomVariables.length; i++)
         {
             dataset.addValue(ValeurVariables[i], NomVariables[i],"");
         }
 
-        JFreeChart pieChartBar = ChartFactory.createBarChart(Titre,"", "", dataset,PlotOrientation.VERTICAL, true, true, true); 
+        JFreeChart barChart = ChartFactory.createBarChart3D(Titre,"", "", dataset,PlotOrientation.VERTICAL, true, true, true); 
         JFreeChart pieChart = ChartFactory.createPieChart3D(Titre, pieDataset, true, true, true); 
 
         ChartPanel PIE = new ChartPanel(pieChart); 
-        ChartPanel BAR = new ChartPanel(pieChartBar); 
+        ChartPanel BAR = new ChartPanel(barChart); 
 
         if(Type.equals("camembert"))
         {

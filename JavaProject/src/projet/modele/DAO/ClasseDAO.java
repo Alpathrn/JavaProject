@@ -73,22 +73,7 @@ public class ClasseDAO  extends DAO<Classe>{
             Logger.getLogger(FenetreMAJ.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-   
-    @Override
-    public boolean ajouter(Classe obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean modifier(Classe obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean supprimer(Classe obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+  
     @Override
     public Classe recuperer(String id) {
     Classe classe = new Classe();  

@@ -73,22 +73,7 @@ public class DetailBulletinDAO  extends DAO<DetailBulletin>{
             Logger.getLogger(FenetreMAJ.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        
-    @Override
-    public boolean ajouter(DetailBulletin obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
-    @Override
-    public boolean modifier(DetailBulletin obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
- 
-    @Override
-    public boolean supprimer(DetailBulletin obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public DetailBulletin recuperer(String id) {
     DetailBulletin detailb = new DetailBulletin();  

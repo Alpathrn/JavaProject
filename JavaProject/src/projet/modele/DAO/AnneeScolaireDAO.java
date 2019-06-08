@@ -5,7 +5,6 @@
  */
 package projet.modele.DAO;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,10 +29,10 @@ public class AnneeScolaireDAO  extends DAO<AnneeScolaire>{
         super(conn.getConn());
         this.connect = conn;
     }
-    
+    @Override
     public void Ajouter(FenetreMAJ ajout)
     {
-        this.fenetre = ajout;
+                this.fenetre = ajout;
         try 
         {
             Statement stmt = connect.getConn().createStatement();
@@ -42,11 +41,12 @@ public class AnneeScolaireDAO  extends DAO<AnneeScolaire>{
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose();   
         } catch (SQLException ex) 
-        {Logger.getLogger(FenetreMAJ.class.getName()).log(Level.SEVERE, null, ex);}
+        { ex.printStackTrace();}
     }
     
-    public void Supprimer(FenetreMAJ supp) {
-        this.fenetre = supp;
+    @Override
+    public void Supprimer(FenetreMAJ ajout) {
+                this.fenetre = ajout;
         try 
         {
             Statement stmt = connect.getConn().createStatement();
@@ -56,25 +56,9 @@ public class AnneeScolaireDAO  extends DAO<AnneeScolaire>{
             new FenetreAccueil(connect).setVisible(true);
             fenetre.dispose(); 
         } catch (SQLException ex) {
-            Logger.getLogger(FenetreMAJ.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
-
-    @Override
-    public boolean ajouter(AnneeScolaire obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean modifier(AnneeScolaire obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-      
-    @Override
-public boolean supprimer(AnneeScolaire obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public AnneeScolaire recuperer(String id) {
             AnneeScolaire annee = new AnneeScolaire();  
@@ -91,6 +75,11 @@ public boolean supprimer(AnneeScolaire obj) {
     }
     return annee;
   }
+
+    @Override
+    public void Maj(FenetreMAJ ajout) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
   
     

@@ -73,21 +73,6 @@ public class BulletinDAO  extends DAO<Bulletin>{
         }
 
     @Override
-    public boolean ajouter(Bulletin obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean modifier(Bulletin obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean supprimer(Bulletin obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Bulletin recuperer(String id) {
         Bulletin bulletin = new Bulletin();  
 

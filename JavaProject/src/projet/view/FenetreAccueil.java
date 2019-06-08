@@ -5,6 +5,7 @@
  */
 package projet.view;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +13,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import projet.controleur.Connexion;
 
 /**
@@ -23,7 +26,6 @@ public class FenetreAccueil extends JFrame implements ActionListener{
     
     private JButton btnMAJ, btnRecherche, btnReporting, btnVisualisation, btnConnexion; 
     private Connexion connexion;    
-    private JPanel Accueil = new JPanel();
     private JLabel image;
        
     public FenetreAccueil (Connexion con) { 
@@ -33,7 +35,7 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         image = new JLabel( new ImageIcon( "Accueil.jpg"));
         image.setLayout( new FlowLayout());
         
-        this.setSize(1200, 600);  
+        this.setSize(900,500);  
         this.connexion = con;
         this.btnMAJ= new JButton("Mise à jour"); 
         this.btnRecherche = new JButton("Recherche"); 
@@ -43,8 +45,8 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         boutonsAccueil();    
         
         this.add(image);
-        //this.getContentPane().add(Accueil);
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
@@ -54,12 +56,12 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         btnRecherche.setBounds(350, 200, 150, 50);
         btnReporting.setBounds(150, 500, 150, 50);
         btnVisualisation.setBounds(350, 500, 150, 50);
-        //btnReporting.setForeground(Color.BLUE); 
         btnMAJ.addActionListener(this);
         btnRecherche.addActionListener(this);
         btnVisualisation.addActionListener(this);
         btnReporting.addActionListener(this);
         btnConnexion.addActionListener(this);
+        btnConnexion.setForeground(new Color (196,74,70));
         
         image.add(btnMAJ);
         image.add(btnRecherche);
@@ -73,29 +75,46 @@ public class FenetreAccueil extends JFrame implements ActionListener{
         
         Object clic = e.getSource();
 
-        if(clic == btnMAJ) 
+        if(clic == btnMAJ) // accès à la fenêtre de mise à jour
         {
-            
+            if(connexion.getOk()!=1)
+             {
+             JOptionPane.showMessageDialog(null, "Veuillez vous connecter à la Base De Données");
+             }
+             else{            
             this.setVisible(false);
-            new FenetreMAJ(connexion).setVisible(true);
+            new FenetreMAJ(connexion).setVisible(true);}
+
             
         }
-        else if(clic == btnRecherche) // accès à la fenêtre de mise à jour
-        {
+        else if(clic == btnRecherche) // accès à la fenêtre de recherche
+        {   if(connexion.getOk()!=1)
+             {
+             JOptionPane.showMessageDialog(null,"Veuillez vous connecter à la Base De Données");
+             }
+             else{   
            this.setVisible(false);
-            new FenetreRecherche(connexion.getConn()).setVisible(true);
+            new FenetreRecherche(connexion.getConn()).setVisible(true);}
 
         }
-        else if(clic == btnReporting) // accès à la fenêtre de recherche
-        {
+        else if(clic == btnReporting) // accès à la fenêtre de reporting
+        {   if(connexion.getOk()!=1)
+             {
+             JOptionPane.showMessageDialog(null, "Veuillez vous connecter à la Base De Données");
+             }
+             else{      
             this.setVisible(false);
-            new FenetreReporting(connexion).setVisible(true);
+            new FenetreReporting(connexion).setVisible(true);}
 
         }
-        else if(clic == btnVisualisation) // accès à la fenêtre de requêtes
-        {
+        else if(clic == btnVisualisation) //acces a la fenetre de visualisation
+        {   if(connexion.getOk()!=1)
+             {
+             JOptionPane.showMessageDialog(null, "Veuillez vous connecter à la Base De Données");
+             }
+             else{   
             this.setVisible(false);
-            new FenetreVisualisation(connexion).setVisible(true);
+            new FenetreVisualisation(connexion).setVisible(true);}
         }
         else if(clic == btnConnexion) //acces a la fenetre de connexion
         {

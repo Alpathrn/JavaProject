@@ -34,7 +34,7 @@ public class FenetreRecherche extends JFrame{
    public FenetreRecherche(Connection con)
     {
         super("Recherche");
-        this.setSize(900, 500);  
+        this.setSize(900,500);  
         this.connection = con;
         this.btn = new JButton[5];
         
@@ -48,7 +48,7 @@ public class FenetreRecherche extends JFrame{
         btn[1].setText("Recherche 2");
         btn[2].setText("Recherche 3");
         btn[3].setText("Recherche 4");
-        btn[4].setText("Retour à l'acceuil");
+        btn[4].setText("Retour à l'accueil");
         titre.setText("Veuillez choisir quelle diagramme vous voulez afficher"); 
         
         for(int i = 0; i < 5 ; i++)

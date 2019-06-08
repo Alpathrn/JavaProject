@@ -42,6 +42,7 @@ public class Connexion implements ActionListener{
      */
     public ArrayList<String> requetesMaj = new ArrayList<>();
 
+    private int ok=0;
     /**
      * Constructeur avec 3 paramètres : nom, login et password de la BDD locale
      *
@@ -64,6 +65,7 @@ public class Connexion implements ActionListener{
 
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement();
+         ok=1;
     }
     
     public Connexion(){
@@ -208,4 +210,9 @@ public class Connexion implements ActionListener{
     public void setRset(ResultSet m_rset){
         rset = m_rset;
     }
+
+    public int getOk() {
+        return ok;
+    }
+    
 }

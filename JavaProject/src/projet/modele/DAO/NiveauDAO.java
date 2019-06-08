@@ -72,21 +72,6 @@ public class NiveauDAO  extends DAO<Niveau>{
             Logger.getLogger(FenetreMAJ.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    @Override
-    public boolean ajouter(Niveau obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean modifier(Niveau obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean supprimer(Niveau obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public Niveau recuperer(String id) {

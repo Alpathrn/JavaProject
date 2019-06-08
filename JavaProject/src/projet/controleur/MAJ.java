@@ -54,7 +54,6 @@ public class MAJ implements ActionListener{
                 {
                     new AnneeScolaireDAO(connexion).Supprimer(fenMAJ);
                 } 
-                
             }
 
             // Bulletin

@@ -6,9 +6,10 @@
 package projet.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.sql.Connection;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,19 +26,20 @@ public class FenetreReporting extends JFrame {
     
     private JPanel Type = new JPanel();
     private JPanel Nom = new JPanel();
-   // private JPanel GRAPHE = new JPanel();
     private JPanel Retour = new JPanel();
     private Connexion connexion;    
     private JButton btn[];
     private JRadioButton camenbert;
     private JRadioButton barre;
     private JLabel titre = new JLabel();
+    private JLabel image;
+    private JPanel crayon = new JPanel();
     
 
     public FenetreReporting(Connexion con)
     {
         super("Reporting");
-        this.setSize(900, 500);  
+        this.setSize(900,500);  
         this.connexion = con;
         this.btn = new JButton[5];
         this.camenbert = new JRadioButton("Camembert");
@@ -52,7 +54,7 @@ public class FenetreReporting extends JFrame {
         btn[0].setText("TD par ecole");
         btn[1].setText("Enseignement par classe");
         btn[2].setText("Inscription par classe");
-        btn[3].setText("Retour à l'acceuil");
+        btn[3].setText("Retour à l'accueil");
         titre.setText("Veuillez choisir quelle diagramme vous voulez afficher"); 
         
         for(int i = 0; i < 5 ; i++)
@@ -61,6 +63,8 @@ public class FenetreReporting extends JFrame {
         }
         
         this.setLayout(new BorderLayout());
+        image = new JLabel( new ImageIcon( "crayonREPORT.png"));
+        crayon.add(image);
         
         ButtonGroup group = new ButtonGroup();
         group.add(camenbert);
@@ -77,13 +81,19 @@ public class FenetreReporting extends JFrame {
         }
         
         Retour.add(btn[3]);
+
         
+        Type.setBackground(new Color(211,255,204));
+        Nom.setBackground(new Color(211,255,204));
+        Retour.setBackground(new Color(211,255,204));
+        this.getContentPane().add(crayon,BorderLayout.WEST);
         this.getContentPane().add(Type, BorderLayout.NORTH);
         this.getContentPane().add(Retour, BorderLayout.SOUTH);
         this.getContentPane().add(Nom, BorderLayout.CENTER);
-        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);    
+        this.setLocationRelativeTo(null);
+
     }
     
     public JButton getbtn(int i)

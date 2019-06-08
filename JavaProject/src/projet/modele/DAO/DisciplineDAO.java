@@ -75,21 +75,6 @@ public class DisciplineDAO  extends DAO<Discipline>{
     }
 
     @Override
-    public boolean ajouter(Discipline obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean modifier(Discipline obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean supprimer(Discipline obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Discipline recuperer(String id) {
         Discipline discipline = new Discipline();  
 

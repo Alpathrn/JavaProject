@@ -6,10 +6,16 @@
 package projet.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
@@ -23,16 +29,42 @@ import projet.controleur.Visualisation;
 public class FenetreVisualisation extends JFrame{
     
     JTableHeader th_visu;
+    private JButton btnR;
+    private JLabel image;
+    private JPanel crayon = new JPanel();
+    private Connexion connexion; 
         
     public FenetreVisualisation(Connexion conn){
+        
         super("Visualisation");
         setTitle("Visualisation de la BDD"); 
-	setSize(750, 625);
+	this.setSize(900,500);
+        this.connexion= conn;
+        JPanel Retour = new JPanel();
+        JPanel ChoixVisu = new JPanel();
+        JPanel Visu = new JPanel();
         
         JTable tb_visu = new JTable();
         tb_visu.setBounds(50, 100, 700, 550);
         JScrollPane scr_visu = new JScrollPane(tb_visu);
-        scr_visu.setBounds(20, 100, 700, 550);  
+        scr_visu.setBounds(20, 100, 700, 550); 
+        
+        image = new JLabel( new ImageIcon( "crayonVISU.png"));
+        crayon.add(image);
+        
+        this.btnR = new JButton();
+        btnR.setText("Retour à l'accueil");
+        btnR.setSize(new Dimension(50,50));
+        Retour.add(btnR);
+        
+        btnR.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {  dispose();
+                new FenetreAccueil(connexion);
+            }
+        });
         
         String[] options_table = { "Sélectionner une table", "annéescolaire", "bulletin", "classe", "detailbulletin", "discipline", "ecole", "enseignement", "evaluation", "inscription", "niveau", "personne", "trimestre"};
         JComboBox cb_visu = new JComboBox(options_table); 
@@ -115,10 +147,17 @@ public class FenetreVisualisation extends JFrame{
             }
         });
         
-        //this.getContentPane().add(tb_visu,BorderLayout.CENTER);
-        this.getContentPane().add(scr_visu);
-        this.getContentPane().add(cb_visu, BorderLayout.NORTH);
+        Visu.add(scr_visu);
+        ChoixVisu.add(cb_visu);
+        Visu.setBackground(new Color(237,230,255));
+        ChoixVisu.setBackground(new Color(237,230,255));
+        Retour.setBackground(new Color(237,230,255));
+        this.getContentPane().add(Visu);
+        this.getContentPane().add(crayon, BorderLayout.WEST);
+        this.getContentPane().add(ChoixVisu, BorderLayout.NORTH);
+        this.getContentPane().add(Retour, BorderLayout.SOUTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 }
